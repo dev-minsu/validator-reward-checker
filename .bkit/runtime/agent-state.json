@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "enabled": true,
+  "teamName": "",
+  "feature": "common-infrastructure",
+  "pdcaPhase": "design",
+  "orchestrationPattern": "leader",
+  "ctoAgent": "opus",
+  "startedAt": "2026-03-19T08:53:14.929Z",
+  "lastUpdated": "2026-03-19T08:54:31.665Z",
+  "teammates": [
+    {
+      "name": "a5fbf9f7084ac3dd7",
+      "role": "bkit:report-generator",
+      "model": "sonnet",
+      "status": "completed",
+      "currentTask": null,
+      "taskId": null,
+      "startedAt": "2026-03-19T08:53:14.930Z",
+      "lastActivityAt": "2026-03-19T08:54:31.663Z"
+    }
+  ],
+  "progress": {
+    "totalTasks": 0,
+    "completedTasks": 0,
+    "inProgressTasks": 0,
+    "failedTasks": 0,
+    "pendingTasks": 0
+  },
+  "recentMessages": [],
+  "sessionId": "deb3873f-1250-4ae9-aab8-7d83ed54ee5b"
+}

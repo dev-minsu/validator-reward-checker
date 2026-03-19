@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-03-18T07:41:48.157Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-18T07:24:33.212Z",
+    "activeFeatures": [
+      "validator-reward-updater"
+    ],
+    "primaryFeature": "validator-reward-updater",
+    "features": {
+      "validator-reward-updater": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-18T07:23:44.536Z",
+          "lastUpdated": "2026-03-18T07:24:33.212Z"
+        },
+        "lastFile": "/Users/minsu/projects/despread/validator-reward-updater/src/index.ts"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-03-17T08:32:40.034Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-18T07:24:33.212Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-18T07:23:44.536Z",
+        "feature": "validator-reward-updater",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-18T07:24:33.212Z",
+        "feature": "validator-reward-updater",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}

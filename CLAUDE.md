@@ -103,6 +103,28 @@ logger.error({ chain: 'avail', error }, 'fetch failed after retries');
 
 ---
 
+## PDCA 워크플로우 규칙
+
+### /pdca report 완료 후 TASK.md 자동 업데이트
+
+`/pdca report {feature}` 완료 보고서 생성 후 반드시 다음을 수행한다:
+
+1. **TASK.md 읽기** — 현재 내용 확인
+2. **feature에 해당하는 태스크 항목 식별** — feature 이름으로 관련 섹션 찾기
+3. **미완료 항목을 완료로 표시**:
+   - `- [ ]` → `- [x]`
+   - 섹션 제목의 상태 미표시 → `✅ (YYYY-MM-DD 완료, Match Rate XX%)` 추가
+4. **TASK.md 저장**
+
+**적용 규칙**:
+- feature = `avail-fetcher` → TASK.md의 `1-4`, `1-5`, `1-6` 섹션 완료 처리
+- feature = `common-infrastructure` → TASK.md의 `1-3` 섹션 완료 처리
+- 일반 규칙: feature 이름과 관련된 모든 미완료 항목을 완료로 처리
+- Match Rate는 `docs/03-analysis/{feature}.analysis.md` 에서 읽어온다
+- 날짜는 오늘 날짜 사용
+
+---
+
 ## 새 체인 추가 체크리스트
 
 새 validator 체인을 추가할 때 다음 순서로 작업한다:

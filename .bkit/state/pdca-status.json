@@ -1,0 +1,328 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-19T09:00:00.000Z",
+  "activeFeatures": [
+    "validator-reward-updater",
+    "db",
+    "common-infrastructure",
+    "validator-reward-checker",
+    "fetchers",
+    "config",
+    "tests",
+    "reward-calculator.ts",
+    "storage.service.ts",
+    "reward-calculator.test.ts",
+    "storage.service.test.ts",
+    "avail-fetcher"
+  ],
+  "primaryFeature": "avail-fetcher",
+  "features": {
+    "validator-reward-updater": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T07:23:44.536Z",
+        "lastUpdated": "2026-03-18T07:24:33.212Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-updater/src/index.ts"
+    },
+    "common-infrastructure": {
+      "phase": "design",
+      "phaseNumber": 2,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {
+        "plan": "docs/01-plan/features/common-infrastructure.plan.md",
+        "design": "docs/02-design/features/common-infrastructure.design.md"
+      },
+      "timestamps": {
+        "started": "2026-03-18T12:10:00.000Z",
+        "lastUpdated": "2026-03-18T12:10:00.000Z"
+      }
+    },
+    "db": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T11:36:47.210Z",
+        "lastUpdated": "2026-03-18T11:37:01.253Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/db/seed.ts"
+    },
+    "validator-reward-checker": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T03:31:36.594Z",
+        "lastUpdated": "2026-03-19T08:45:13.581Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/cli.ts"
+    },
+    "fetchers": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T03:31:55.822Z",
+        "lastUpdated": "2026-03-19T08:46:38.212Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/fetchers/avail.fetcher.test.ts"
+    },
+    "config": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T03:32:03.452Z",
+        "lastUpdated": "2026-03-19T03:32:37.706Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/config/env.test.ts"
+    },
+    "tests": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T03:32:16.434Z",
+        "lastUpdated": "2026-03-19T03:33:21.235Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/utils/retry.test.ts"
+    },
+    "reward-calculator.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T08:44:43.381Z",
+        "lastUpdated": "2026-03-19T08:44:43.381Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/reward-calculator.ts"
+    },
+    "storage.service.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T08:44:51.373Z",
+        "lastUpdated": "2026-03-19T08:44:51.373Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/storage.service.ts"
+    },
+    "reward-calculator.test.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T08:45:22.009Z",
+        "lastUpdated": "2026-03-19T08:45:22.009Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/reward-calculator.test.ts"
+    },
+    "storage.service.test.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-19T08:45:32.461Z",
+        "lastUpdated": "2026-03-19T08:45:32.461Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/storage.service.test.ts"
+    },
+    "avail-fetcher": {
+      "phase": "completed",
+      "phaseNumber": 5,
+      "matchRate": 97,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {
+        "plan": "docs/01-plan/features/avail-fetcher.plan.md",
+        "design": "docs/02-design/features/avail-fetcher.design.md",
+        "analysis": "docs/03-analysis/avail-fetcher.analysis.md",
+        "report": "docs/04-report/avail-fetcher.report.md"
+      },
+      "timestamps": {
+        "started": "2026-03-19T05:00:00.000Z",
+        "lastUpdated": "2026-03-19T09:00:00.000Z",
+        "completedAt": "2026-03-19T09:00:00.000Z"
+      }
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-17T08:32:40.034Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-19T08:46:38.212Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-18T07:23:44.536Z",
+      "feature": "validator-reward-updater",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T07:24:33.212Z",
+      "feature": "validator-reward-updater",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T11:36:47.210Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T11:37:01.254Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:31:36.594Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:31:41.650Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:31:48.446Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:31:55.822Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:32:03.452Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:32:16.434Z",
+      "feature": "tests",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:32:23.398Z",
+      "feature": "tests",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:32:37.706Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T03:33:21.235Z",
+      "feature": "tests",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:44:43.381Z",
+      "feature": "reward-calculator.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:44:51.373Z",
+      "feature": "storage.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:45:01.216Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:45:13.581Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:45:22.009Z",
+      "feature": "reward-calculator.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:45:32.461Z",
+      "feature": "storage.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:45:47.879Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:46:30.334Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-19T08:46:38.212Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    }
+  ]
+}
