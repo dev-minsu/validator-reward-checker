@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-19T09:00:00.000Z",
+  "lastUpdated": "2026-03-25T14:56:42.602Z",
   "activeFeatures": [
     "validator-reward-updater",
     "db",
@@ -13,9 +13,15 @@
     "storage.service.ts",
     "reward-calculator.test.ts",
     "storage.service.test.ts",
-    "avail-fetcher"
+    "avail-fetcher",
+    "slack.service.ts",
+    "indexer.service.ts",
+    "report.service.ts",
+    "indexer.service.test.ts",
+    "report.service.test.ts",
+    "slack.service.test.ts"
   ],
-  "primaryFeature": "avail-fetcher",
+  "primaryFeature": "avail-redesign",
   "features": {
     "validator-reward-updater": {
       "phase": "do",
@@ -54,7 +60,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-18T11:36:47.210Z",
-        "lastUpdated": "2026-03-18T11:37:01.253Z"
+        "lastUpdated": "2026-03-25T14:51:13.017Z"
       },
       "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/db/seed.ts"
     },
@@ -67,7 +73,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T03:31:36.594Z",
-        "lastUpdated": "2026-03-19T08:45:13.581Z"
+        "lastUpdated": "2026-03-25T06:14:03.095Z"
       },
       "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/cli.ts"
     },
@@ -80,7 +86,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T03:31:55.822Z",
-        "lastUpdated": "2026-03-19T08:46:38.212Z"
+        "lastUpdated": "2026-03-24T05:51:41.861Z"
       },
       "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/fetchers/avail.fetcher.test.ts"
     },
@@ -93,9 +99,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T03:32:03.452Z",
-        "lastUpdated": "2026-03-19T03:32:37.706Z"
+        "lastUpdated": "2026-03-25T10:17:26.509Z"
       },
-      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/config/env.test.ts"
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/config/networks.ts"
     },
     "tests": {
       "phase": "do",
@@ -106,9 +112,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T03:32:16.434Z",
-        "lastUpdated": "2026-03-19T03:33:21.235Z"
+        "lastUpdated": "2026-03-25T05:54:27.777Z"
       },
-      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/utils/retry.test.ts"
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/utils/date.test.ts"
     },
     "reward-calculator.ts": {
       "phase": "do",
@@ -132,7 +138,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T08:44:51.373Z",
-        "lastUpdated": "2026-03-19T08:44:51.373Z"
+        "lastUpdated": "2026-03-25T05:52:45.867Z"
       },
       "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/storage.service.ts"
     },
@@ -158,9 +164,26 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-19T08:45:32.461Z",
-        "lastUpdated": "2026-03-19T08:45:32.461Z"
+        "lastUpdated": "2026-03-25T05:57:09.180Z"
       },
       "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/storage.service.test.ts"
+    },
+    "avail-redesign": {
+      "phase": "completed",
+      "phaseNumber": 5,
+      "matchRate": 96,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {
+        "plan": "docs/01-plan/features/avail-redesign.plan.md",
+        "analysis": "docs/03-analysis/avail-redesign.analysis.md",
+        "report": "docs/04-report/avail-redesign.report.md"
+      },
+      "timestamps": {
+        "started": "2026-03-25T05:56:51.836Z",
+        "lastUpdated": "2026-03-26T00:00:00.000Z",
+        "completedAt": "2026-03-26T00:00:00.000Z"
+      }
     },
     "avail-fetcher": {
       "phase": "completed",
@@ -179,6 +202,84 @@
         "lastUpdated": "2026-03-19T09:00:00.000Z",
         "completedAt": "2026-03-19T09:00:00.000Z"
       }
+    },
+    "slack.service.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:51:49.890Z",
+        "lastUpdated": "2026-03-25T05:51:49.890Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/slack.service.ts"
+    },
+    "indexer.service.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:52:07.948Z",
+        "lastUpdated": "2026-03-25T14:56:09.015Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/indexer.service.ts"
+    },
+    "report.service.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:52:18.799Z",
+        "lastUpdated": "2026-03-25T05:52:18.799Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/src/services/report.service.ts"
+    },
+    "indexer.service.test.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:54:43.106Z",
+        "lastUpdated": "2026-03-25T14:56:42.601Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/indexer.service.test.ts"
+    },
+    "report.service.test.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:54:57.647Z",
+        "lastUpdated": "2026-03-25T05:57:34.567Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/report.service.test.ts"
+    },
+    "slack.service.test.ts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T05:55:08.592Z",
+        "lastUpdated": "2026-03-25T05:55:08.592Z"
+      },
+      "lastFile": "/Users/minsu/projects/despread/validator-reward-checker/tests/services/slack.service.test.ts"
     }
   },
   "pipeline": {
@@ -189,7 +290,7 @@
   "session": {
     "startedAt": "2026-03-17T08:32:40.034Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-19T08:46:38.212Z"
+    "lastActivity": "2026-03-25T14:56:42.602Z"
   },
   "history": [
     {
@@ -321,6 +422,396 @@
     {
       "timestamp": "2026-03-19T08:46:38.212Z",
       "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T04:42:00.624Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T04:42:17.713Z",
+      "feature": "storage.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T04:42:21.005Z",
+      "feature": "storage.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T04:42:28.059Z",
+      "feature": "storage.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T04:42:34.118Z",
+      "feature": "storage.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:03:26.748Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:04:20.287Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:04:24.218Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:04:28.541Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:05:10.397Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:05:41.712Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:50:55.062Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:04.715Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:09.376Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:13.441Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:25.087Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:33.084Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:41.861Z",
+      "feature": "fetchers",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T05:51:48.521Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:14:11.389Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:14:15.887Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:14:19.522Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:33:33.763Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:33:39.711Z",
+      "feature": "storage.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:33:46.346Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:33:56.565Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:34:06.772Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:34:29.134Z",
+      "feature": "storage.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:34:33.820Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:34:41.397Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-24T06:34:45.672Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:51:41.548Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:51:49.890Z",
+      "feature": "slack.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:52:07.948Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:52:18.799Z",
+      "feature": "report.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:52:26.302Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:52:36.222Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:52:45.867Z",
+      "feature": "storage.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:53:16.383Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:53:26.570Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:54:27.777Z",
+      "feature": "tests",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:54:43.106Z",
+      "feature": "indexer.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:54:57.647Z",
+      "feature": "report.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:55:08.592Z",
+      "feature": "slack.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:55:15.447Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:55:22.649Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:57:09.180Z",
+      "feature": "storage.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:57:29.752Z",
+      "feature": "indexer.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T05:57:34.567Z",
+      "feature": "report.service.test.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:12:51.416Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:12:56.284Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:12:59.213Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:13:08.130Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:13:13.123Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:13:49.958Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:13:55.705Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:13:59.470Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:14:03.095Z",
+      "feature": "validator-reward-checker",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:14:07.105Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T06:14:14.164Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T10:17:26.509Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T14:51:13.018Z",
+      "feature": "db",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T14:55:56.398Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T14:56:09.015Z",
+      "feature": "indexer.service.ts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T14:56:42.601Z",
+      "feature": "indexer.service.test.ts",
       "phase": "do",
       "action": "updated"
     }
