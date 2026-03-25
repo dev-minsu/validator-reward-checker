@@ -7,19 +7,22 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
-    "cli": "ts-node -r tsconfig-paths/register src/cli.ts",
+    "dev": "ts-node -r dotenv/config -r tsconfig-paths/register src/index.ts",
+    "cli": "ts-node -r dotenv/config -r tsconfig-paths/register src/cli.ts",
     "test": "vitest run --passWithNoTests",
     "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --no-error-on-unmatched-pattern",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "db:init": "ts-node -r tsconfig-paths/register src/db/seed.ts"
+    "db:init": "ts-node -r dotenv/config -r tsconfig-paths/register src/db/seed.ts",
+    "collect": "ts-node -r dotenv/config -r tsconfig-paths/register src/cli.ts --collect"
   },
   "dependencies": {
     "@polkadot/api": "^12.4.2",
     "bignumber.js": "^9.1.2",
+    "dotenv": "^17.3.1",
     "mongodb": "^6.14.2",
     "node-cron": "^3.0.3",
     "pino": "^9.6.0",
+    "smol-toml": "^1.6.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {

@@ -9,8 +9,8 @@ export interface WithdrawalRecord {
 }
 
 export class StorageService {
-  async saveSnapshot(data: SnapshotData & { rewardAmount: string | null }): Promise<void> {
-    const db = getDb();
+  async saveSnapshot(data: Omit<SnapshotData, 'rewardAmount'> & { rewardAmount?: string | null }): Promise<void> {
+    const db = await getDb();
     const doc = {
       projectId: data.projectId,
       snapshotDate: data.snapshotDate,
@@ -32,11 +32,58 @@ export class StorageService {
     );
   }
 
-  async getWithdrawals(projectId: string, date: string): Promise<WithdrawalRecord[]> {
-    const db = getDb();
+  async getSnapshot(projectId: string, snapshotDate: string): Promise<{ balance: string } | null> {
+    const db = await getDb();
+    return db
+      .collection<{ balance: string }>('balance_snapshots')
+      .findOne({ projectId, snapshotDate });
+  }
+
+  async getWithdrawals(projectId: string, fromDate: string, toDate: string): Promise<WithdrawalRecord[]> {
+    const db = await getDb();
     return db
       .collection<WithdrawalRecord>('withdrawal_records')
-      .find({ projectId, withdrawnAt: date })
+      .find({ projectId, withdrawnAt: { $gte: fromDate, $lte: toDate } })
       .toArray();
+  }
+
+  // ── balance_history (신규) ──────────────────────────────────
+
+  async saveBalanceHistory(data: {
+    projectId: string;
+    snapshotAt: Date;
+    balance: string;
+    fetchType: 'A' | 'B' | 'C';
+  }): Promise<void> {
+    const db = await getDb();
+    const doc = {
+      projectId: data.projectId,
+      snapshotAt: data.snapshotAt,
+      balance: data.balance,
+      fetchType: data.fetchType,
+      createdAt: new Date(),
+    };
+    await db.collection('balance_history').replaceOne(
+      { projectId: data.projectId, snapshotAt: data.snapshotAt },
+      doc,
+      { upsert: true },
+    );
+    logger.info(
+      { projectId: data.projectId, snapshotAt: data.snapshotAt.toISOString() },
+      'balance history saved',
+    );
+  }
+
+  async getSnapshotAt(
+    projectId: string,
+    beforeOrAt: Date,
+  ): Promise<{ balance: string; snapshotAt: Date } | null> {
+    const db = await getDb();
+    return db
+      .collection<{ balance: string; snapshotAt: Date }>('balance_history')
+      .findOne(
+        { projectId, snapshotAt: { $lte: beforeOrAt } },
+        { sort: { snapshotAt: -1 } },
+      );
   }
 }

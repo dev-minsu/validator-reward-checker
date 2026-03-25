@@ -1,0 +1,53 @@
+# ── Avail (Type A: Substrate balance) ─────────────────────────────
+[avail]
+projectId       = "avail"
+fetchType       = "A"
+rpcUrl          = "wss://mainnet.avail-rpc.com"
+walletAddress   = ""   # SS58 주소 입력 필요
+decimals        = 18
+
+# ── Stacks (Type B: Hiro REST API staking) ────────────────────────
+[stacks]
+projectId       = "stacks"
+fetchType       = "B"
+apiUrl          = "https://api.mainnet.stacks.co"
+walletAddress   = ""   # STX 주소 입력 필요
+
+# ── Story (Type B: Cosmos SDK staking REST) ───────────────────────
+[story]
+projectId        = "story"
+fetchType        = "B"
+apiUrl           = "https://api.story.foundation"
+walletAddress    = ""   # 위임자 주소 입력 필요
+validatorAddress = ""   # 검증자 주소 입력 필요
+
+# ── Hyperliquid (Type B: validator REST API) ──────────────────────
+[hyperliquid]
+projectId       = "hyperliquid"
+fetchType       = "B"
+apiUrl          = "https://api.hyperliquid.xyz"
+walletAddress   = ""   # 주소 입력 필요
+
+# ── Berachain (Type C: BGT Reward Vault 이벤트) ───────────────────
+[bera]
+projectId       = "bera"
+fetchType       = "C"
+rpcUrl          = "https://rpc.berachain.com"
+walletAddress   = ""   # 주소 입력 필요
+contractAddress = ""   # BGT Reward Vault 주소 입력 필요
+
+# ── Infrared (Type C: iBERA ERC-20 Transfer) ──────────────────────
+[infrared]
+projectId       = "infrared"
+fetchType       = "C"
+rpcUrl          = "https://rpc.berachain.com"
+walletAddress   = ""   # 주소 입력 필요
+contractAddress = ""   # iBERA token 주소 입력 필요
+
+# ── Monad (Type C: MON ERC-20 Transfer, 테스트넷) ─────────────────
+[monad]
+projectId       = "monad"
+fetchType       = "C"
+rpcUrl          = "https://testnet-rpc.monad.xyz"
+walletAddress   = ""   # 주소 입력 필요
+contractAddress = ""   # MON token 주소 입력 필요

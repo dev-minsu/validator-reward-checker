@@ -62,7 +62,7 @@
 
 ---
 
-### 1-4. Avail Fetcher 구현 (Type A — Balance Diff) ✅ (2026-03-19 완료, Match Rate 97%)
+### 1-4. Avail Fetcher 구현 (Type A — Balance Diff) ✅ (2026-03-24 완료, Match Rate 97%)
 
 > Avail은 Substrate 기반 체인. `@polkadot/api` 의 `ApiPromise` 로 접속하여
 > `api.query.system.account(address)` 로 잔고를 조회한다.
@@ -84,15 +84,20 @@
 - [x] `src/services/storage.service.ts` — DB 저장
   - [x] `balance_snapshots` upsert (`replaceOne({ projectId, snapshotDate }, doc, { upsert: true })`)
   - [x] `withdrawal_records` 조회 (당일 출금 보정용, `find({ projectId, withdrawnAt: date })`)
+  - [x] TypeScript 타입 시그니처 수정 (GAP-04: rewardAmount union 타입 정확성)
+  - [x] `await getDb()` 버그 수정 (GAP-05: async/await 누락 3곳)
 
 ---
 
-### 1-5. CLI 수동 실행 ✅ (2026-03-19 완료, Match Rate 100%)
+### 1-5. CLI 수동 실행 ✅ (2026-03-24 완료, Match Rate 97%)
 
 - [x] `src/cli.ts` 작성
   - [x] `--chain avail` 옵션으로 특정 체인만 실행
   - [x] `--date 2025-03-17` 옵션으로 특정 날짜 지정 (기본값: 오늘)
   - [x] `--dry-run` 옵션: DB 저장 없이 결과만 출력
+  - [x] `parseArgs` index guard 개선 (GAP-02: indexOf !== -1 체크)
+  - [x] 미확인 체인 처리 추가 (GAP-03: logger.warn)
+  - [x] `await getDb()` 버그 수정 (GAP-05)
 
   ```bash
   # 사용 예시
@@ -102,7 +107,7 @@
 
 ---
 
-### 1-6. 단위 테스트 ✅ (2026-03-19 완료, Match Rate 100%, 11/11 cases passed)
+### 1-6. 단위 테스트 ✅ (2026-03-24 완료, Match Rate 97%, 26/26 cases passed)
 
 - [x] `tests/fetchers/avail.fetcher.test.ts` (4 cases)
   - [x] polkadot.js `ApiPromise` mock 처리
@@ -116,23 +121,96 @@
   - [x] 최초 실행 (어제 스냅샷 없음) → `reward = null`
   - [x] 잔고가 줄었을 때 출금 기록 없으면 경고 로그
 
-- [x] `tests/services/storage.service.test.ts` (3 cases)
+- [x] `tests/services/storage.service.test.ts` (4+ cases)
   - [x] `saveSnapshot` 호출 시 upsert: true 옵션 전달
   - [x] `getWithdrawals` 올바른 filter 전달
   - [x] `getWithdrawals` 결과 없으면 빈 배열 반환
+  - [x] `rewardAmount: null` 첫 실행 케이스 추가 (GAP-05 관련)
+  - [x] 비동기 mock 동기화 (getDb() async 처리)
 
 ---
 
-## Phase 2 이후 (백로그)
+### 1-7. seed-balance (Avail 과거 잔고 시드) ✅ (2026-03-24 완료, Match Rate 100%)
 
-> Phase 1 완료 후 순서대로 진행
+- [x] `src/db/seed.ts` — `BalanceSnapshotSeed` 인터페이스 추가
+- [x] `src/db/seed.ts` — `seedBalanceSnapshot()` 함수 추가 (replaceOne upsert)
+- [x] `main()` 호출 추가 — `npm run db:init` 실행 시 avail 2026-02-26 잔고 삽입
+- [x] 삽입 Document: `{ projectId: 'avail', snapshotDate: '2026-02-26', balance: '648173780900000000000000', rewardAmount: null, fetchType: 'A' }`
 
-### Phase 2: Type B Fetchers
-- [ ] Stacks Fetcher (Hiro REST API)
+---
+
+### 1-8. monthly-reward (월단위 리워드 계산) ✅ (2026-03-24 완료, Match Rate 100%)
+
+- [x] `src/config/env.ts` — `REWARD_CYCLE_DAY` 추가 (기본 26, 범위 1~28)
+- [x] `src/services/storage.service.ts` — `getSnapshot()` 헬퍼 추가, `getWithdrawals()` 날짜 범위로 변경
+- [x] `src/cli.ts` — 기준일 판별(`isMonthlyDate`), 이전 기준일 계산, 월단위 출금 집계
+- [x] `.env.example` — `REWARD_CYCLE_DAY=26` 추가
+- [x] 테스트 44 cases 전체 통과
+
+---
+
+### Phase 2: 리포트 시스템 (avail-redesign)
+
+> 설계: [docs/01-plan/features/avail-redesign.plan.md](./docs/01-plan/features/avail-redesign.plan.md)
+
+#### 2-1. 환경 변수 + 유틸리티 ✅ (2026-03-25 완료)
+
+- [x] `src/config/env.ts` — `BALANCE_COLLECTION_CRON`, `REPORT_CRON`, `REPORT_DEFAULT_START_DAY`, `AVAIL_SUBSCAN_API_KEY`, `SLACK_WEBHOOK_URL` 추가
+- [x] `src/utils/date.ts` — `kstDateToUtc`, `utcToKstDateStr`, `toPeriodKey`, `getDefaultPeriod` 구현
+- [x] `.env.example` — 신규 변수 5개 추가
+
+#### 2-2. StorageService 확장 ✅ (2026-03-25 완료)
+
+- [x] `src/services/storage.service.ts`
+  - [x] `saveBalanceHistory(data)` — `balance_history` upsert (TTL 90일)
+  - [x] `getSnapshotAt(projectId, beforeOrAt: Date)` — 경계시각 이전 최신 스냅샷 조회
+- [x] `src/db/seed.ts` — `balance_history` TTL 인덱스, `reward_reports` 인덱스, `indexer_query_cache` 인덱스 추가
+
+#### 2-3. IndexerService (Subscan API + DB 캐시) ✅ (2026-03-25 완료)
+
+- [x] `src/services/indexer.service.ts`
+  - [x] `fetchWithdrawals(projectId, periodStart, periodEnd)` 구현
+  - [x] `indexer_query_cache` 기준 캐시 조회 (빈 결과 포함 재호출 방지)
+  - [x] Subscan API 호출 → `withdrawal_records` 저장 (rawResponse 포함)
+  - [x] `withRetry()` 적용 (최대 3회), MAX_PAGES=100 가드
+  - [x] `indexer_query_cache` upsert (count=0인 빈 결과도 저장)
+- [x] `tests/services/indexer.service.test.ts` (5 케이스: 캐시히트/빈캐시히트/API호출/0건저장/재호출방지)
+
+#### 2-4. ReportService (월단위 리포트 + CSV) ✅ (2026-03-25 완료)
+
+- [x] `src/services/report.service.ts`
+  - [x] `generate(projectId, periodStart, periodEnd, {dryRun?})` — 경계 잔고 조회 + 인출 집계 + 계산
+  - [x] `rewardAmount = (balanceEnd + totalWithdrawals) − balanceStart` (BigNumber.js)
+  - [x] `reward_reports` 저장 (version increment), dryRun 시 저장 생략
+  - [x] `toCsv(report)` — CSV 문자열 생성
+- [x] `tests/services/report.service.test.ts` (5 케이스)
+
+#### 2-5. SlackService (알림) ✅ (2026-03-25 완료)
+
+- [x] `src/services/slack.service.ts`
+  - [x] `sendReport(report, tokenSymbol, decimals)` — toHuman() 변환 후 리포트 알림
+  - [x] `sendError(chain, error)` — 에러 알림
+- [x] `tests/services/slack.service.test.ts` (2 케이스)
+
+#### 2-6. 통합 스케줄러 + CLI 확장 ✅ (2026-03-25 완료)
+
+- [x] `src/index.ts` — 잔고 수집 cron + 리포트 cron 통합 (독립 실행, SIGTERM 처리)
+- [x] `src/cli.ts`
+  - [x] `--collect` 커맨드 추가
+  - [x] `--report [--beg DATE] [--end DATE] [--dry-run]` 커맨드 추가
+  - [x] `--add-balance --chain --time --balance` 커맨드 추가
+- [x] `package.json` — `collect` 스크립트 추가 (`npm run collect -- --chain avail`)
+
+#### 2-7. 문서 + 테스트
+
+- [x] `README.md` — Subscan API 키 발급 절차 추가
+- [x] `npm test` 전체 통과 확인
+- [x] `npx tsc --noEmit` 에러 없음 확인
+
+
+<!-- ## 백로그   -->
+<!-- ### Phase 3: Type C Fetchers
 - [ ] Story Fetcher (Cosmos SDK staking REST)
-- [ ] Hyperliquid Fetcher (자체 REST API)
-
-### Phase 3: Type C Fetchers
 - [ ] EVM Transfer 공통 베이스 (`src/fetchers/evm-transfer.fetcher.ts`)
   - ethers.js `provider.getLogs()` + ERC-20 Transfer 이벤트 필터
   - 날짜 → 블록 범위 변환 로직
@@ -141,13 +219,13 @@
 - [ ] Infrared Fetcher (iBERA ERC-20 Transfer)
 - [ ] Monad Fetcher (MON ERC-20 Transfer, 테스트넷)
 
-### Phase 4: 알림 및 리포팅
-- [ ] Slack 알림 (`src/services/slack.service.ts`)
-- [ ] Google Sheets 동기화 (`src/services/spreadsheet.service.ts`)
-- [ ] 크론 스케줄러 (`src/index.ts`) — 매일 00:00 KST
+## Phase 4: Type D Fetchers
+- [ ] Stacks Fetcher
+- [ ] Hyperliquid Fetcher (자체 REST API) -->
 
-### Phase 5: 안정화
+
+<!-- ### Phase 6: 안정화
 - [ ] 통합 테스트 (실제 RPC 연결, --dry-run 모드)
 - [ ] 출금 내역 등록 CLI (`npm run cli -- --add-withdrawal`)
 - [ ] 과거 날짜 재처리 배치 스크립트
-- [ ] 헬스체크 + 모니터링 알림 (연속 실패 N회 시 경고)
+- [ ] 헬스체크 + 모니터링 알림 (연속 실패 N회 시 경고) -->

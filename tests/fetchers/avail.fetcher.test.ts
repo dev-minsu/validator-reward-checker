@@ -6,10 +6,13 @@ vi.mock('@polkadot/api', () => ({
   WsProvider: vi.fn(),
 }));
 
-vi.mock('@/config/env', () => ({
-  env: {
-    AVAIL_RPC_URL: 'wss://avail-test.example.com',
-    AVAIL_WALLET_ADDRESS: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
+vi.mock('@/config/networks', () => ({
+  availConfig: {
+    projectId: 'avail',
+    fetchType: 'A',
+    decimals: 18,
+    rpcUrl: 'wss://avail-test.example.com',
+    walletAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   },
 }));
 

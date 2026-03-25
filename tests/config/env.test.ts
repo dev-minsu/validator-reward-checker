@@ -1,59 +1,89 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
-const VALID_ENV = {
-  MONGO_DB_URI: 'mongodb://localhost:27017/validator_rewards',
-  AVAIL_RPC_URL: 'wss://avail-rpc.example.com',
-  AVAIL_WALLET_ADDRESS: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
-  STACKS_API_URL: 'https://stacks-api.example.com',
-  STACKS_WALLET_ADDRESS: 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7',
-  STORY_RPC_URL: 'https://story-rpc.example.com',
-  STORY_WALLET_ADDRESS: '0x1234567890123456789012345678901234567890',
-  STORY_VALIDATOR_ADDRESS: '0x1234567890123456789012345678901234567890',
-  BERA_RPC_URL: 'https://bera-rpc.example.com',
-  BERA_WALLET_ADDRESS: '0x1234567890123456789012345678901234567890',
-  BERA_BGT_VAULT_ADDRESS: '0x1234567890123456789012345678901234567890',
-  INFRARED_RPC_URL: 'https://infrared-rpc.example.com',
-  INFRARED_WALLET_ADDRESS: '0x1234567890123456789012345678901234567890',
-  INFRARED_TOKEN_ADDRESS: '0x1234567890123456789012345678901234567890',
-  HYPERLIQUID_API_URL: 'https://hl-api.example.com',
-  HYPERLIQUID_WALLET_ADDRESS: '0x1234567890123456789012345678901234567890',
-  MONAD_RPC_URL: 'https://monad-rpc.example.com',
-  MONAD_WALLET_ADDRESS: '0x1234567890123456789012345678901234567890',
-  MONAD_TOKEN_ADDRESS: '0x1234567890123456789012345678901234567890',
-};
-
 describe('env', () => {
   beforeEach(() => {
     vi.resetModules();
-    // 기존 환경 변수 정리
-    for (const key of Object.keys(VALID_ENV)) {
-      delete process.env[key];
-    }
+    delete process.env.MONGO_DB_URI;
     delete process.env.LOG_LEVEL;
+    delete process.env.REWARD_CYCLE_DAY;
+    delete process.env.BALANCE_COLLECTION_CRON;
+    delete process.env.REPORT_CRON;
+    delete process.env.REPORT_DEFAULT_START_DAY;
+    delete process.env.AVAIL_SUBSCAN_API_KEY;
+    delete process.env.SLACK_WEBHOOK_URL;
   });
 
-  it('유효한 환경 변수 세트로 정상 파싱', async () => {
-    Object.assign(process.env, VALID_ENV);
+  it('MONGO_DB_URI 없이도 정상 파싱 (optional)', async () => {
     const { env } = await import('@/config/env');
-    expect(env.MONGO_DB_URI).toBe(VALID_ENV.MONGO_DB_URI);
-    expect(env.LOG_LEVEL).toBe('info');
-  });
-
-  it('필수 변수 누락 시 ZodError throw', async () => {
-    const { MONGO_DB_URI: _, ...withoutMongoUri } = VALID_ENV;
-    Object.assign(process.env, withoutMongoUri);
-    await expect(import('@/config/env')).rejects.toThrow();
+    expect(env.MONGO_DB_URI).toBeUndefined();
   });
 
   it('LOG_LEVEL 기본값 info', async () => {
-    Object.assign(process.env, VALID_ENV);
-    delete process.env.LOG_LEVEL;
     const { env } = await import('@/config/env');
     expect(env.LOG_LEVEL).toBe('info');
   });
 
-  it('잘못된 URL 형식 시 ZodError throw', async () => {
-    Object.assign(process.env, { ...VALID_ENV, AVAIL_RPC_URL: 'not-a-url' });
-    await expect(import('@/config/env')).rejects.toThrow();
+  it('MONGO_DB_URI 설정 시 정상 파싱', async () => {
+    process.env.MONGO_DB_URI = 'mongodb://localhost:27017/test';
+    const { env } = await import('@/config/env');
+    expect(env.MONGO_DB_URI).toBe('mongodb://localhost:27017/test');
+  });
+
+  it('REWARD_CYCLE_DAY 기본값 26', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.REWARD_CYCLE_DAY).toBe(26);
+  });
+
+  it('REWARD_CYCLE_DAY 환경 변수로 설정', async () => {
+    process.env.REWARD_CYCLE_DAY = '15';
+    const { env } = await import('@/config/env');
+    expect(env.REWARD_CYCLE_DAY).toBe(15);
+  });
+
+  it('BALANCE_COLLECTION_CRON 기본값', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.BALANCE_COLLECTION_CRON).toBe('0 * * * *');
+  });
+
+  it('REPORT_CRON 기본값', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.REPORT_CRON).toBe('0 0 26 * *');
+  });
+
+  it('REPORT_DEFAULT_START_DAY 기본값 26', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.REPORT_DEFAULT_START_DAY).toBe(26);
+  });
+
+  it('AVAIL_SUBSCAN_API_KEY 미설정 시 undefined (optional)', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.AVAIL_SUBSCAN_API_KEY).toBeUndefined();
+  });
+
+  it('SLACK_WEBHOOK_URL 미설정 시 undefined (optional)', async () => {
+    const { env } = await import('@/config/env');
+    expect(env.SLACK_WEBHOOK_URL).toBeUndefined();
+  });
+});
+
+describe('requireEnv', () => {
+  beforeEach(() => {
+    vi.resetModules();
+    delete process.env.MONGO_DB_URI;
+    delete process.env.LOG_LEVEL;
+    delete process.env.REWARD_CYCLE_DAY;
+  });
+
+  it('설정된 변수 반환', async () => {
+    process.env.MONGO_DB_URI = 'mongodb://localhost:27017/test';
+    const { requireEnv } = await import('@/config/env');
+    expect(requireEnv('MONGO_DB_URI')).toBe('mongodb://localhost:27017/test');
+  });
+
+  it('미설정 변수 접근 시 Error throw', async () => {
+    const { requireEnv } = await import('@/config/env');
+    expect(() => requireEnv('MONGO_DB_URI')).toThrow(
+      'Missing required environment variable: MONGO_DB_URI',
+    );
   });
 });

@@ -1,5 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { env } from '@/config/env';
+import { availConfig } from '@/config/networks';
 import { logger } from '@/utils/logger';
 import { withRetry } from '@/utils/retry';
 import { toHuman } from '@/utils/bignum';
@@ -25,11 +25,11 @@ export class AvailFetcher implements IFetcher {
   }
 
   private async _fetchOnce(date: string): Promise<FetchResult> {
-    const provider = new WsProvider(env.AVAIL_RPC_URL);
+    const provider = new WsProvider(availConfig.rpcUrl);
     const api = await ApiPromise.create({ provider });
 
     try {
-      const accountInfo = await api.query.system.account(env.AVAIL_WALLET_ADDRESS);
+      const accountInfo = await api.query.system.account(availConfig.walletAddress);
       const { data } = accountInfo as unknown as {
         data: {
           free: { toBigInt(): bigint; toString(): string };
