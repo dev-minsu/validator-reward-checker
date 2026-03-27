@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# 체인 설정 (wallet address 등 민감 정보 포함)
+config/networks.toml
+
 # 빌드 산출물
 dist/
 
@@ -25,3 +28,9 @@ Thumbs.db
 
 # TypeScript 캐시
 *.tsbuildinfo
+
+# 툴 내부 상태 (커밋 불필요)
+.bkit/
+.claude/
+.playwright-mcp/
+*.save

@@ -153,20 +153,20 @@
 
 > 설계: [docs/01-plan/features/avail-redesign.plan.md](./docs/01-plan/features/avail-redesign.plan.md)
 
-#### 2-1. 환경 변수 + 유틸리티 ✅ (2026-03-25 완료)
+#### 2-1. 환경 변수 + 유틸리티 ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/config/env.ts` — `BALANCE_COLLECTION_CRON`, `REPORT_CRON`, `REPORT_DEFAULT_START_DAY`, `AVAIL_SUBSCAN_API_KEY`, `SLACK_WEBHOOK_URL` 추가
 - [x] `src/utils/date.ts` — `kstDateToUtc`, `utcToKstDateStr`, `toPeriodKey`, `getDefaultPeriod` 구현
 - [x] `.env.example` — 신규 변수 5개 추가
 
-#### 2-2. StorageService 확장 ✅ (2026-03-25 완료)
+#### 2-2. StorageService 확장 ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/services/storage.service.ts`
   - [x] `saveBalanceHistory(data)` — `balance_history` upsert (TTL 90일)
   - [x] `getSnapshotAt(projectId, beforeOrAt: Date)` — 경계시각 이전 최신 스냅샷 조회
 - [x] `src/db/seed.ts` — `balance_history` TTL 인덱스, `reward_reports` 인덱스, `indexer_query_cache` 인덱스 추가
 
-#### 2-3. IndexerService (Subscan API + DB 캐시) ✅ (2026-03-25 완료)
+#### 2-3. IndexerService (Subscan API + DB 캐시) ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/services/indexer.service.ts`
   - [x] `fetchWithdrawals(projectId, periodStart, periodEnd)` 구현
@@ -176,7 +176,7 @@
   - [x] `indexer_query_cache` upsert (count=0인 빈 결과도 저장)
 - [x] `tests/services/indexer.service.test.ts` (5 케이스: 캐시히트/빈캐시히트/API호출/0건저장/재호출방지)
 
-#### 2-4. ReportService (월단위 리포트 + CSV) ✅ (2026-03-25 완료)
+#### 2-4. ReportService (월단위 리포트 + CSV) ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/services/report.service.ts`
   - [x] `generate(projectId, periodStart, periodEnd, {dryRun?})` — 경계 잔고 조회 + 인출 집계 + 계산
@@ -185,14 +185,14 @@
   - [x] `toCsv(report)` — CSV 문자열 생성
 - [x] `tests/services/report.service.test.ts` (5 케이스)
 
-#### 2-5. SlackService (알림) ✅ (2026-03-25 완료)
+#### 2-5. SlackService (알림) ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/services/slack.service.ts`
   - [x] `sendReport(report, tokenSymbol, decimals)` — toHuman() 변환 후 리포트 알림
   - [x] `sendError(chain, error)` — 에러 알림
 - [x] `tests/services/slack.service.test.ts` (2 케이스)
 
-#### 2-6. 통합 스케줄러 + CLI 확장 ✅ (2026-03-25 완료)
+#### 2-6. 통합 스케줄러 + CLI 확장 ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `src/index.ts` — 잔고 수집 cron + 리포트 cron 통합 (독립 실행, SIGTERM 처리)
 - [x] `src/cli.ts`
@@ -201,11 +201,12 @@
   - [x] `--add-balance --chain --time --balance` 커맨드 추가
 - [x] `package.json` — `collect` 스크립트 추가 (`npm run collect -- --chain avail`)
 
-#### 2-7. 문서 + 테스트
+#### 2-7. 문서 + 테스트 ✅ (2026-03-25 완료, Match Rate 96%)
 
 - [x] `README.md` — Subscan API 키 발급 절차 추가
-- [x] `npm test` 전체 통과 확인
+- [x] `npm test` 전체 통과 확인 (67 tests passing)
 - [x] `npx tsc --noEmit` 에러 없음 확인
+- [x] 완료 보고서: `docs/04-report/avail-redesign.report.md`
 
 
 <!-- ## 백로그   -->
