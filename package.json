@@ -13,7 +13,13 @@
     "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --no-error-on-unmatched-pattern",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "db:init": "ts-node -r dotenv/config -r tsconfig-paths/register src/db/seed.ts",
-    "collect": "ts-node -r dotenv/config -r tsconfig-paths/register src/cli.ts --collect"
+    "collect": "ts-node -r dotenv/config -r tsconfig-paths/register src/cli.ts --collect",
+    "start": "node dist/index.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop validator-reward-checker",
+    "pm2:restart": "pm2 restart validator-reward-checker",
+    "pm2:logs": "pm2 logs validator-reward-checker",
+    "pm2:status": "pm2 status"
   },
   "dependencies": {
     "@polkadot/api": "^12.4.2",
