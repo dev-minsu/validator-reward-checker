@@ -18,48 +18,48 @@
 
 ```bash
 # 의존성 설치
-npm install
+pnpm install
 
 # 개발 모드 실행 (ts-node-dev) — 통합 스케줄러
-npm run dev
+pnpm dev
 
 # 빌드
-npm run build
+pnpm build
 
 # 테스트
-npm test
+pnpm test
 
 # DB 컬렉션 초기화 (인덱스 생성 + 시드 데이터)
-npm run db:init
+pnpm db:init
 ```
 
 ### 잔고 수집 (수동)
 
 ```bash
 # 특정 체인 잔고 즉시 수집
-npm run collect -- --chain avail
+pnpm collect -- --chain avail
 ```
 
 ### 리포트 생성 (수동)
 
 ```bash
 # 범위 직접 지정
-npm run cli -- --report --chain avail --beg 2026-02-26 --end 2026-03-25
+pnpm cli -- --report --chain avail --beg 2026-02-26 --end 2026-03-25
 
 # 시작일만 지정 (종료: 어제 23:59:59 KST)
-npm run cli -- --report --chain avail --beg 2026-02-26
+pnpm cli -- --report --chain avail --beg 2026-02-26
 
 # 인수 없음 (전월 REPORT_DEFAULT_START_DAY일 ~ 어제)
-npm run cli -- --report --chain avail
+pnpm cli -- --report --chain avail
 
 # dry-run: DB 저장 없이 결과만 출력
-npm run cli -- --report --chain avail --dry-run
+pnpm cli -- --report --chain avail --dry-run
 ```
 
 ### 잔고 수동 입력 (수집 데이터 누락 시)
 
 ```bash
-npm run cli -- --add-balance \
+pnpm cli -- --add-balance \
   --chain avail \
   --time "2026-02-26T00:00:00+09:00" \
   --balance 648173780900000000000000

@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "description": "Daily validator reward collector for 7 blockchain networks",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
+  "packageManager": "pnpm@10",
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "dev": "ts-node -r dotenv/config -r tsconfig-paths/register src/index.ts",
